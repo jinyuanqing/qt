@@ -1,0 +1,16 @@
+因为项目中将调用python的部分做了分离.所以我把pro文件和main.cpp放到了这里,main.cpp是实现的调用部分,pro里边有python库的调用.
+把python的object.h文件中的slot要做下处理442行代码处,这个百度就可以搜到.
+这是修改后的.
+#undef  slots
+typedef struct{
+    const char* name;
+    int basicsize;
+    int itemsize;
+    unsigned int flags;
+    PyType_Slot *slots; /* terminated by slot==0. */
+} PyType_Spec;
+#define slots Q_SLOTS
+
+test_py.py文件要放到调试的目录与exe同级方可.
+目前run没有问题,就是debug时候调试器会崩溃,但是不影响程序的运行结果,只是没法调试.
+希望朋友们帮助改进.
